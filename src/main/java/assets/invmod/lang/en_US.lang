@@ -1,0 +1,40 @@
+tile.blockNexus.name=Nexus
+
+item.phaseCrystal.name=Phase Crystal
+item.riftFlux.name=Rift Flux
+
+item.nexusCatalyst.name=Nexus Catalyst
+item.infusedSword.name=Infused Sword
+item.searingBow.name=Searing Bow
+item.catalystMixture.name=Catalyst Mixture
+item.stableCatalystMixture.name=Stable Catalyst Mixture
+item.stableNexusCatalyst.name=Stable Nexus Catalyst
+item.dampingAgent.name=Damping Agent
+item.strongDampingAgent.name=Strong Damping Agent
+item.strangeBone.name=Strange Bone
+item.strongCatalyst.name=Strong Nexus Catalyst
+item.engyHammer.name=Engineers Hammer
+nexusAdjuster.name=Nexus Adjuster
+materialProbe.name=Material Probe
+emptyTrap.name=Empty Trap
+riftTrap.name=Rift Trap (Folded)
+flameTrap.name=Flame Trap (Folded)
+item.smallRemnants.name=Small Remnants
+item.debugWand.name=Debug Wand
+
+itemGroup.invasionTab=Invasion mod
+
+entity.IMZombie.name=IM Zombie
+entity.IMZombiePigman.name=IM Zombie Pigman
+entity.IMSkeleton.name=IM Skeleton
+entity.IMSpider.name=IM Spider
+entity.IMPigEngy.name=IM Pigman Engineer
+entity.IMBird.name=WIP-IM Bird
+entity.IMThrower.name=IM Thrower
+entity.IMWolf.name=IM Wolf
+entity.IMCreeper.name=IM Creeper
+entity.IMGiantBird.name=IM Vulture
+entity.IMBoulder.name=Boulder
+entity.IMEgg.name=Spider Egg
+entity.IMTrap.name=Trap
+entity.IMImp.name=IM Imp

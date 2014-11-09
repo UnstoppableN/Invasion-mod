@@ -1,0 +1,17 @@
+/mod_Invasion.class
+/Config.class
+/ConfigInvasion.class
+/GuiHandler.class
+/IBlockAccessExtended.class
+/INotifyTask.class
+/IPathfindable.class
+/InvasionCommand.class
+/PacketHandlerCommon.class
+/ProxyCommon.class
+/ResourceLoader.class
+/SimplyID.class
+/SoundHandlerCommon.class
+/SparrowAPI.class
+/TerrainDataLayer.class
+/Tester.class
+/TickHandlerServer.class

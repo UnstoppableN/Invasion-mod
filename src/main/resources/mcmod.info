@@ -1,0 +1,16 @@
+[
+{
+  "modid": "mod_invasion",
+  "name": "Invasion mod",
+  "description": "So you think your base is tough do you?",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": [ "Lieu", "Elsee", "UnstoppableN" ],
+  "credits": "Lieu and Elsee, the original mod creators.  Davidee for better spawn eggs",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": ["MinecraftForge"]
+}
+]
