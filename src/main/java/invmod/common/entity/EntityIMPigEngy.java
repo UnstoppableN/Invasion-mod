@@ -28,8 +28,8 @@ import net.minecraft.world.World;
 public class EntityIMPigEngy extends EntityIMMob implements ICanDig 
 {
 	private static final int MAX_LADDER_TOWER_HEIGHT = 4;
-	private static final int META_ITEM_ID_HELD = 29;
-	private static final int META_SWINGING = 30;
+	private static final int META_ITEM_ID_HELD = 32;
+	private static final int META_SWINGING = 33;
 	private final NavigatorEngy bo;
 	private final PathNavigateAdapter oldNavAdapter;
 	private int swingTimer;
@@ -65,8 +65,8 @@ public class EntityIMPigEngy extends EntityIMMob implements ICanDig
 		this.maxDestructiveness = 2;
 		this.askForScaffoldTimer = 0;
 
-		this.dataWatcher.addObject(29, new ItemStack(Items.iron_pickaxe,1));
-		this.dataWatcher.addObject(30, Byte.valueOf((byte) 0));
+		this.dataWatcher.addObject(32, new ItemStack(Items.iron_pickaxe,1));
+		this.dataWatcher.addObject(33, Byte.valueOf((byte) 0));
 
 		setMaxHealthAndHealth(mod_Invasion.getMobHealth(this));
 		setName("Pigman Engineer");
@@ -429,12 +429,17 @@ public class EntityIMPigEngy extends EntityIMMob implements ICanDig
 
 	protected boolean isSwinging()
 	{
-		return getDataWatcher().getWatchableObjectByte(30) != 0;
+		return getDataWatcher().getWatchableObjectByte(33) != 0;
 	}
 
 	protected void setSwinging(boolean flag)
 	{
-		getDataWatcher().updateObject(30, Byte.valueOf((byte) (flag == true ? 1 : 0)));
+		if(flag){
+			getDataWatcher().updateObject(33, Byte.valueOf((byte)1));
+		}else{
+			getDataWatcher().updateObject(33, Byte.valueOf((byte)0));
+		}
+		
 	}
 
 	protected int getSwingSpeed()
@@ -445,7 +450,7 @@ public class EntityIMPigEngy extends EntityIMMob implements ICanDig
 	protected ItemStack getCurrentItem()
 	{
 		if (this.worldObj.isRemote) {
-			ItemStack item = getDataWatcher().getWatchableObjectItemStack(29);
+			ItemStack item = getDataWatcher().getWatchableObjectItemStack(32);
 			if (item != this.currentItem)
 			{
 				this.currentItem = item;
@@ -456,7 +461,7 @@ public class EntityIMPigEngy extends EntityIMMob implements ICanDig
 
 	protected void setCurrentItem(ItemStack item) {
 		this.currentItem = item;
-		getDataWatcher().updateObject(29, item);
+		getDataWatcher().updateObject(32, item);
 	}
 
 	public static boolean canPlaceLadderAt(IBlockAccess map, int x, int y, int z) {

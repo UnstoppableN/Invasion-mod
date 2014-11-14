@@ -96,7 +96,7 @@ public class EntityIMThrower extends EntityIMMob
 @Override
 	public void onUpdate(){
 		super.onUpdate();
-		if ((this.worldObj.isRemote) && (this.metaChanged != getDataWatcher().getWatchableObjectByte(29))) {
+		if ((this.worldObj.isRemote) && (this.metaChanged !=Byte.valueOf((byte)getDataWatcher().getWatchableObjectByte(29)))) {
 			DataWatcher data = getDataWatcher();
 			this.metaChanged = data.getWatchableObjectByte(29);
 			setTexture(data.getWatchableObjectInt(31));

@@ -97,6 +97,21 @@ public class BlockNexus extends BlockContainer {
 	}
 	
 	@Override
+	public Item getItemDropped(int par1int, Random random, int par3int)
+    {
+		int itemvalue=random.nextInt(4);
+		switch(itemvalue)
+		{
+		case 0:
+			return Items.apple;
+		case 1:
+			return Items.diamond;
+		default:
+			return null;
+		}
+    }
+	
+	@Override
 	public void randomDisplayTick(World world, int x, int y, int z, Random random) {
 		int meta = world.getBlockMetadata(x, y, z);
 		int numberOfParticles;

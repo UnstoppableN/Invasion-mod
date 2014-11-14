@@ -185,6 +185,7 @@ public class TileEntityNexus extends TileEntity implements INexusAccess, IInvent
 	public void debugStartInvaion(int startWave) {
 		mod_Invasion.tryGetInvasionPermission(this);
 		startInvasion(startWave);
+		this.activated=true;
 	}
 
 	public void createBolt(int x, int y, int z, int t) {
@@ -626,7 +627,9 @@ public class TileEntityNexus extends TileEntity implements INexusAccess, IInvent
 				try{
 	          //should have getPlayerForUsername at the end
 				EntityPlayerMP player=(EntityPlayerMP)FMLCommonHandler.instance().getMinecraftServerInstance().getConfigurationManager().func_152612_a((String) entry.getKey());
+				if(player!=null){
 				player.getEntityWorld().playSoundAtEntity((Entity)player,sound,1,1);
+				}
 				}catch(Exception name){
 				System.out.println("Problem while trying to play sound at player.");
 				}

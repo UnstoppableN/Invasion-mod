@@ -12,6 +12,7 @@ import invmod.common.entity.EntityIMSkeleton;
 import invmod.common.entity.EntityIMSpider;
 import invmod.common.entity.EntityIMThrower;
 import invmod.common.entity.EntityIMZombie;
+import invmod.common.entity.EntityIMZombiePigman;
 import net.minecraft.world.World;
 
 public class MobBuilder 
@@ -28,6 +29,12 @@ public class MobBuilder
       zombie.setTier(mobConstruct.getTier());
       mob = zombie;
       break;
+    case ZOMBIEPIGMAN:
+        EntityIMZombiePigman zombiePigman = new EntityIMZombiePigman(world, nexus);
+        zombiePigman.setTexture(mobConstruct.getTexture());
+        zombiePigman.setTier(mobConstruct.getTier());
+        mob = zombiePigman;
+        break;
     case SPIDER:
       EntityIMSpider spider = new EntityIMSpider(world, nexus);
       spider.setTexture(mobConstruct.getTexture());

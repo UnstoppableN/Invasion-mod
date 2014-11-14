@@ -1,13 +1,14 @@
 package invmod.common.util.spawneggs;
 
 import net.minecraft.block.BlockDispenser;
+import net.minecraft.dispenser.BehaviorDefaultDispenseItem;
 import net.minecraft.dispenser.IBlockSource;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 
-public class DispenserBehaviorSpawnEgg {
+public class DispenserBehaviorSpawnEgg extends BehaviorDefaultDispenseItem{
 	
 	public ItemStack dispenseStack(IBlockSource blockSource, ItemStack stack) {
 		EnumFacing enumfacing = BlockDispenser.func_149937_b /*getFacing*/(blockSource.getBlockMetadata());

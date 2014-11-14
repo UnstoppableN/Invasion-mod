@@ -112,9 +112,6 @@ public class EntityIMSpider extends EntityIMMob implements ISpawnsOffspring {
 
 	@Override
 	public void onUpdate() {
-		if (this.worldObj.isRemote) {
-			this.worldObj.isRemote = this.worldObj.isRemote;
-		}
 		super.onUpdate();
 		if ((this.worldObj.isRemote) && (this.metaChanged != getDataWatcher().getWatchableObjectByte(29))) {
 			DataWatcher data = getDataWatcher();

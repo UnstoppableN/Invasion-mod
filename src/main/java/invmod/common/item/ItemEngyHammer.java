@@ -8,6 +8,7 @@ public class ItemEngyHammer extends ItemIM{
 		super();
 		this.setCreativeTab(null);
 		this.setUnlocalizedName("engyHammer");
+		this.setFull3D();
 	}
 	
 

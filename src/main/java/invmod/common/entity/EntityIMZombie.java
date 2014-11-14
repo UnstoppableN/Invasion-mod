@@ -440,7 +440,6 @@ public class EntityIMZombie extends EntityIMMob implements ICanDig
 	}
 	
 	public void updateAnimation(boolean override){
-	System.out.println("update animation");
 	if ((!this.worldObj.isRemote) && ((this.terrainModifier.isBusy())||override) )
 	{
 		setSwinging(true);

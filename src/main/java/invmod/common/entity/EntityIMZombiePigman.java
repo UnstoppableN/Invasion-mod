@@ -4,6 +4,7 @@ import invmod.common.IBlockAccessExtended;
 import invmod.common.INotifyTask;
 import invmod.common.mod_Invasion;
 import invmod.common.entity.ai.EntityAIAttackNexus;
+import invmod.common.entity.ai.EntityAICharge;
 import invmod.common.entity.ai.EntityAIGoToNexus;
 import invmod.common.entity.ai.EntityAIKillEntity;
 import invmod.common.entity.ai.EntityAILeaderTarget;
@@ -21,7 +22,9 @@ import invmod.common.util.IPosition;
 import java.util.Calendar;
 import java.util.List;
 
+import scala.reflect.internal.Trees.This;
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.DataWatcher;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -43,6 +46,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.Vec3;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -74,7 +78,7 @@ public class EntityIMZombiePigman extends EntityIMMob implements ICanDig
 	public EntityIMZombiePigman(World world, INexusAccess nexus) 
 	{
 		super(world, nexus);
-		this.terrainModifier = new TerrainModifier(this, 2.0F);
+		this.terrainModifier = new TerrainModifier(this, 0.75F);
 		this.terrainDigger = new TerrainDigger(this, this.terrainModifier, 1.0F);
 		this.dropChance = 0.35F;
 		if (world.isRemote){
@@ -93,7 +97,7 @@ public class EntityIMZombiePigman extends EntityIMMob implements ICanDig
 		dataWatcher.addObject(31, Integer.valueOf(0));
 		dataWatcher.addObject(28, Integer.valueOf(this.flavour));
 		dataWatcher.addObject(27, Byte.valueOf((byte) 0));
-
+		dataWatcher.addObject(17, Byte.valueOf((byte)0));
 		setAttributes(this.tier, this.flavour);
 		this.floatsInWater=true;
 		setAI();
@@ -123,7 +127,7 @@ public class EntityIMZombiePigman extends EntityIMMob implements ICanDig
 	public void onLivingUpdate() 
 	{
 		super.onLivingUpdate();
-		updateAnimation();
+		updateAnimation(false);
 		updateSound();
 	}
 
@@ -138,16 +142,16 @@ public class EntityIMZombiePigman extends EntityIMMob implements ICanDig
 		//added entityaiswimming and increased all other tasksordernumers with 1
 		this.tasks = new EntityAITasks(this.worldObj.theProfiler);
 		this.tasks.addTask(0, new EntityAISwimming(this));
-		this.tasks.addTask(1, new EntityAIKillEntity(this, EntityPlayer.class, 40));
-		this.tasks.addTask(1, new EntityAIKillEntity(this, EntityPlayerMP.class, 40));
-		this.tasks.addTask(2, new EntityAIAttackNexus(this));
-		this.tasks.addTask(3, new EntityAIWaitForEngy(this, 4.0F, true));
-		this.tasks.addTask(4, new EntityAIKillEntity(this, EntityLiving.class, 40));
-		this.tasks.addTask(5, new EntityAIGoToNexus(this));
-		this.tasks.addTask(6, new EntityAIWanderIM(this));
-		this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-		this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityIMCreeper.class, 12.0F));
-		this.tasks.addTask(8, new EntityAILookIdle(this));
+		this.tasks.addTask(2, new EntityAIKillEntity(this, EntityPlayer.class, 40));
+		this.tasks.addTask(2, new EntityAIKillEntity(this, EntityPlayerMP.class, 40));
+		this.tasks.addTask(3, new EntityAIAttackNexus(this));
+		this.tasks.addTask(4, new EntityAIWaitForEngy(this, 4.0F, true));
+		this.tasks.addTask(5, new EntityAIKillEntity(this, EntityLiving.class, 40));
+		this.tasks.addTask(6, new EntityAIGoToNexus(this));
+		this.tasks.addTask(7, new EntityAIWanderIM(this));
+		this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
+		this.tasks.addTask(9, new EntityAIWatchClosest(this, EntityIMCreeper.class, 12.0F));
+		this.tasks.addTask(9, new EntityAILookIdle(this));
 		
 
 		this.targetTasks = new EntityAITasks(this.worldObj.theProfiler);
@@ -157,8 +161,8 @@ public class EntityIMZombiePigman extends EntityIMMob implements ICanDig
 
 		if (this.tier == 3) 
 		{
-			this.tasks.addTask(4, new EntityAIStoop(this));
-			this.tasks.addTask(3, new EntityAISprint(this));
+			//this.tasks.addTask(4, new EntityAIStoop(this));
+			this.tasks.addTask(1, new EntityAICharge(this,EntityPlayer.class,0.75F));
 		} else 
 		{	
 			//track players from sensing them
@@ -419,9 +423,9 @@ public class EntityIMZombiePigman extends EntityIMMob implements ICanDig
 			setFire(8);
 	}
 
-	protected void updateAnimation() 
-	{
-		if ((!this.worldObj.isRemote) && (this.terrainModifier.isBusy())) 
+	public void updateAnimation(boolean override){
+		//System.out.println(this.getXCoord()+" "+this.getYCoord()+" "+this.getZCoord()+" charging:"+this.isCharging());
+		if ((!this.worldObj.isRemote) && ((this.terrainModifier.isBusy())||override) )
 		{
 			setSwinging(true);
 		}
@@ -439,8 +443,41 @@ public class EntityIMZombiePigman extends EntityIMMob implements ICanDig
 		{
 			this.swingTimer = 0;
 		}
+		this.swingProgress =(float)((float)this.swingTimer / (float)swingSpeed);
+	
+	    if (isCharging()) {
+	    	boolean mobgriefing = this.worldObj.getGameRules().getGameRuleBooleanValue("mobGriefing");
+	        this.limbSwingAmount = ((float)(this.limbSwingAmount + 0.5D));
+	        int x= this.getXCoord();
+	        int y=this.getYCoord();
+	        int z=this.getZCoord();
+	      if(!worldObj.isRemote)
+	      {
+	        for(int i=y;i<=y+1;i++)
+	        {
+	        	for(int j=x-1;j<=x+1;j++)
+	        	{
+	        		for(int k=z-1;k<=z+1;k++)
+	        		{
+	        			Block block=worldObj.getBlock(j, i, k);
+	        		    int meta = worldObj.getBlockMetadata(j,i,k);
 
-		this.swingProgress = (this.swingTimer / swingSpeed);
+	        			if(block.getMaterial()!=Material.air){
+	        				if(isBlockDestructible(this.worldObj, j, i, k,block))
+	        				{
+	        				this.playSound("random.explode", 0.2F, 0.5F);	        		      	
+	        		    	  if(mod_Invasion.getDestructedBlocksDrop())
+	        		    	  {
+	        		    		  block.dropBlockAsItem(this.worldObj, j, i, k, meta,0);
+	        		    	  }
+	        				worldObj.setBlock(j,i,k, Blocks.air);
+	        				}
+	        			}
+	        		}
+	        	}
+	        }
+	      }
+	      }
 	}
 
 	protected boolean isSwinging() 
@@ -569,7 +606,7 @@ public class EntityIMZombiePigman extends EntityIMMob implements ICanDig
 			this.tier=3;
 				setName("Zombie Pigman Brute");
 				setGender(1);
-				setBaseMoveSpeedStat(0.17F);
+				setBaseMoveSpeedStat(0.20F);
 				this.attackStrength = 18;
 				this.maxDestructiveness = 2;
 				this.isImmuneToFire = true;
@@ -578,7 +615,7 @@ public class EntityIMZombiePigman extends EntityIMMob implements ICanDig
 		}
 	}
 
-	
+	@Override
 	protected void addRandomArmor()
     {
         super.addRandomArmor();
@@ -586,11 +623,19 @@ public class EntityIMZombiePigman extends EntityIMMob implements ICanDig
       
     }
 	
-	public IEntityLivingData onSpawnWithEgg(IEntityLivingData par1EntityLivingData)
-    {
-		System.out.println("spawnegg!!!!");
-        return (IEntityLivingData)par1EntityLivingData;
-    }
+	  public boolean isCharging()
+	  {
+	    return this.dataWatcher.getWatchableObjectByte(17) != 0;
+	  }
+	  
+	  public void setCharging(boolean flag)
+	  {
+	    if (flag) {
+	      this.dataWatcher.updateObject(17, Byte.valueOf((byte)127));
+	    } else {
+	      this.dataWatcher.updateObject(17, Byte.valueOf((byte)0));
+	    }
+	  }
 	
 	@Override
 	public void onBlockRemoved(int paramInt1, int paramInt2, int paramInt3,
