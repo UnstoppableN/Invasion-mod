@@ -463,7 +463,7 @@ public class EntityIMZombiePigman extends EntityIMMob implements ICanDig
 	        		    int meta = worldObj.getBlockMetadata(j,i,k);
 
 	        			if(block.getMaterial()!=Material.air){
-	        				if(isBlockDestructible(this.worldObj, j, i, k,block))
+	        				if(isBlockDestructible(this.worldObj, j, i, k,block) && block!=mod_Invasion.blockNexus)
 	        				{
 	        				this.playSound("random.explode", 0.2F, 0.5F);	        		      	
 	        		    	  if(mod_Invasion.getDestructedBlocksDrop())
