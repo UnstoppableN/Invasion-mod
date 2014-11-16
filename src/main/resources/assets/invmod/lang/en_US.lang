@@ -25,6 +25,7 @@ item.debugWand.name=Debug Wand
 itemGroup.invasionTab=Invasion Mod
 
 entity.IMZombie.name=IM Zombie
+entity.IMZombiePigman.name=IM Zombie Pigman
 entity.IMSkeleton.name=IM Skeleton
 entity.IMSpider.name=IM Spider
 entity.IMPigEngy.name=IM Pigman Engineer

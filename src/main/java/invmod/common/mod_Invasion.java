@@ -104,7 +104,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 
 //basic @Mod 
-@Mod(modid = "mod_Invasion", name = "Invasion", version = "1.1.1")
+@Mod(modid = "mod_Invasion", name = "Invasion", version = "1.1.2")
 public class mod_Invasion 
 {
 
@@ -114,7 +114,7 @@ public class mod_Invasion
 	
 	//public static ResourceLoader resourceLoader;
 	public static String recentNews;
-	public static Version versionNumber = new Version(1, 1, 1);
+	public static Version versionNumber = new Version(1, 1, 2);
 	public static String latestVersionNumber;
 	public static GuiHandler guiHandler;
 	public static ConfigInvasion configInvasion;
