@@ -582,16 +582,16 @@ public static final float[] DEFAULT_NIGHT_MOB_PATTERN_1_SLOT_WEIGHTS = {
 
 		GameRegistry.addRecipe(new ItemStack(itemSearingBow, 1), new Object[] { "XXX", "X# ", "X  ", Character.valueOf('X'), new ItemStack(itemRiftFlux, 1), Character.valueOf('#'),new ItemStack(Items.bow, 1, OreDictionary.WILDCARD_VALUE) });
 
-		GameRegistry.addRecipe(new ItemStack(Items.diamond, 1), new Object[] { " X ", " X ", " X ", Character.valueOf('X'), new ItemStack(itemRiftFlux, 1) });
+		GameRegistry.addRecipe(new ItemStack(Items.diamond, 1), new Object[] { " X ", "X  X", " X ", Character.valueOf('X'), new ItemStack(itemRiftFlux, 1) });
 
-		GameRegistry.addRecipe(new ItemStack(Items.diamond, 1), new Object[] { "   ", "XXX", "   ", Character.valueOf('X'), new ItemStack(itemRiftFlux, 1) });
-
+		GameRegistry.addRecipe(new ItemStack(Items.gunpowder, 16), new Object[] { "   ", "XXX", "   ", Character.valueOf('X'), new ItemStack(itemRiftFlux, 1) });
+		GameRegistry.addRecipe(new ItemStack(Items.gunpowder, 16), new Object[] { " X ", " X ", " X ", Character.valueOf('X'), new ItemStack(itemRiftFlux, 1) });
+		
 		GameRegistry.addRecipe(new ItemStack(Items.iron_ingot, 4), new Object[] { "   ", " X ", "   ", Character.valueOf('X'), new ItemStack(itemRiftFlux, 1) });
 
 		GameRegistry.addRecipe(new ItemStack(Items.redstone, 24), new Object[] { "   ", "X X", "   ", Character.valueOf('X'), new ItemStack(itemRiftFlux, 1) });
 
 		GameRegistry.addRecipe(new ItemStack(Items.dye, 12, 4), new Object[] { " X ", "   ", " X ", Character.valueOf('X'), new ItemStack(itemRiftFlux, 1) });
-		GameRegistry.addRecipe(new ItemStack(Items.gunpowder, 32), new Object[] { " X ", "X X", " X ", Character.valueOf('X'), new ItemStack(itemRiftFlux, 1) });
 
 		GameRegistry.addRecipe(new ItemStack(itemIMTrap, 1, 0), new Object[] { " X ", "X#X", " X ", Character.valueOf('X'), Items.iron_ingot, Character.valueOf('#'), new ItemStack(itemRiftFlux, 1) });
 
