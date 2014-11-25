@@ -55,6 +55,7 @@ import invmod.common.util.spawneggs.SpawnEggInfo;
 import invmod.common.util.spawneggs.SpawnEggRegistry;
 
 import java.io.BufferedWriter;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -64,7 +65,10 @@ import java.util.Map;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDispenser;
+import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.IResourceManager;
+import net.minecraft.client.resources.IResourceManagerReloadListener;
 import net.minecraft.command.CommandHandler;
 import net.minecraft.command.ICommandManager;
 import net.minecraft.entity.Entity;
@@ -81,6 +85,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.StringTranslate;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.MinecraftForge;
@@ -91,6 +96,7 @@ import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLInterModComms;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
@@ -101,6 +107,7 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.resources.IReloadableResourceManager;
 
 
 //basic @Mod 
@@ -298,7 +305,8 @@ public static final float[] DEFAULT_NIGHT_MOB_PATTERN_1_SLOT_WEIGHTS = {
 		//Register to receive subscribed events
 		FMLCommonHandler.instance().bus().register(this);
 		MinecraftForge.EVENT_BUS.register(this);
-
+		FMLInterModComms.sendMessage("Waila", "register", "invmod.common.util.IMWailaProvider.callbackRegister");
+		
 		if (craftItemsEnabled) 
 		{
 			addRecipes();
@@ -334,6 +342,24 @@ public static final float[] DEFAULT_NIGHT_MOB_PATTERN_1_SLOT_WEIGHTS = {
 
 	@EventHandler
 	public void postInitialise(FMLPostInitializationEvent evt) {
+		((IReloadableResourceManager)Minecraft.getMinecraft().getResourceManager()).registerReloadListener(new IResourceManagerReloadListener() {
+			private boolean ranOnce = false;
+
+			@Override
+			public void onResourceManagerReload(IResourceManager resourcemanager) {
+				// FML forces a TExturePack reload after MC has finished initialising, allowing for mod icons to be registered at any point in init
+				// we only want to run on the second and later icon reloads
+				if (!ranOnce) {
+					ranOnce = true;
+					return;
+				}
+
+						StringTranslate.inject(new ByteArrayInputStream(("item.upgrade.structural."  + ".name="   + " "  + " ("  + ")").getBytes()));
+
+
+
+			}
+		});
 	}
 	
 	@EventHandler
@@ -410,7 +436,6 @@ public static final float[] DEFAULT_NIGHT_MOB_PATTERN_1_SLOT_WEIGHTS = {
 	protected void loadBlocks() 
 	{
 		blockNexus = new BlockNexus();
-		
 		GameRegistry.registerBlock(blockNexus, blockNexus.getUnlocalizedName().substring(5));
 		GameRegistry.registerTileEntity(TileEntityNexus.class, "Nexus");
 	}
@@ -582,11 +607,11 @@ public static final float[] DEFAULT_NIGHT_MOB_PATTERN_1_SLOT_WEIGHTS = {
 
 		GameRegistry.addRecipe(new ItemStack(itemSearingBow, 1), new Object[] { "XXX", "X# ", "X  ", Character.valueOf('X'), new ItemStack(itemRiftFlux, 1), Character.valueOf('#'),new ItemStack(Items.bow, 1, OreDictionary.WILDCARD_VALUE) });
 
-		GameRegistry.addRecipe(new ItemStack(Items.diamond, 1), new Object[] { " X ", "X  X", " X ", Character.valueOf('X'), new ItemStack(itemRiftFlux, 1) });
-
-		GameRegistry.addRecipe(new ItemStack(Items.gunpowder, 16), new Object[] { "   ", "XXX", "   ", Character.valueOf('X'), new ItemStack(itemRiftFlux, 1) });
 		GameRegistry.addRecipe(new ItemStack(Items.gunpowder, 16), new Object[] { " X ", " X ", " X ", Character.valueOf('X'), new ItemStack(itemRiftFlux, 1) });
-		
+		GameRegistry.addRecipe(new ItemStack(Items.gunpowder, 16), new Object[] { "   ", "XXX", "   ", Character.valueOf('X'), new ItemStack(itemRiftFlux, 1) });
+
+		GameRegistry.addRecipe(new ItemStack(Items.diamond, 1), new Object[] { " X ", "X X", " X ", Character.valueOf('X'), new ItemStack(itemRiftFlux, 1) });
+
 		GameRegistry.addRecipe(new ItemStack(Items.iron_ingot, 4), new Object[] { "   ", " X ", "   ", Character.valueOf('X'), new ItemStack(itemRiftFlux, 1) });
 
 		GameRegistry.addRecipe(new ItemStack(Items.redstone, 24), new Object[] { "   ", "X X", "   ", Character.valueOf('X'), new ItemStack(itemRiftFlux, 1) });

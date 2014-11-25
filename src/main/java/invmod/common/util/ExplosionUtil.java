@@ -67,6 +67,8 @@ public class ExplosionUtil {
 	                  world.spawnParticle("smoke", d0, d1, d2, d3, d4, d5);
 	              }
 
+	              if(!world.isRemote)
+	              {
 	              if (block.getMaterial() != Material.air)
 	              {
 	                  if (block.canDropFromExplosion(explosion))
@@ -81,6 +83,7 @@ public class ExplosionUtil {
 
 	                  block.onBlockExploded(world, i, j, k, explosion);
 	              }
+	          }
 	          }
 	      }
 

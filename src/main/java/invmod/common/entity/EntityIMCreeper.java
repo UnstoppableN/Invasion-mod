@@ -171,10 +171,7 @@ public class EntityIMCreeper extends EntityIMMob
       if (this.timeSinceIgnited >= 30)
       {
         this.timeSinceIgnited = 30;
-        if (!this.worldObj.isRemote)
-        {
-          this.explosionDeath = true;
-        }
+        this.explosionDeath = true;
       }
     }
 
@@ -259,17 +256,15 @@ public class EntityIMCreeper extends EntityIMMob
 
   protected void doExplosion()
   {
-
-		boolean mobgriefing = this.worldObj.getGameRules().getGameRuleBooleanValue("mobGriefing");
-  
-  Explosion explosion = new Explosion(this.worldObj, this, this.posX, this.posY + 1.0D, this.posZ, 1.3F);
-  explosion.isFlaming = false;
-  explosion.isSmoking = mobgriefing;
-  explosion.doExplosionA();
-  ExplosionUtil.doExplosionB(this.worldObj,explosion,false);
-
+      Explosion explosion = new Explosion(this.worldObj,this, posX, posY, posZ, 2.1F);
+      explosion.isFlaming = false;
+      explosion.isSmoking = true;
+      if(!worldObj.isRemote)
+      {
+      explosion.doExplosionA();
+      }
+      ExplosionUtil.doExplosionB(worldObj,explosion,true);
   }
-
   
   public int getCreeperState()
   {
@@ -283,4 +278,5 @@ public class EntityIMCreeper extends EntityIMMob
     }
     this.dataWatcher.updateObject(16, Byte.valueOf((byte)state));
   }
+  
 }

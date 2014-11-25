@@ -21,6 +21,9 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
@@ -119,7 +122,6 @@ public class TileEntityNexus extends TileEntity implements INexusAccess, IInvent
 		updateStatus();
 
 		updateAI();
-
 
 		if ((this.mode == 1) || (this.mode == 2) || (this.mode == 3)) {
 			if (this.resumedFromNBT) {
@@ -1035,5 +1037,18 @@ public class TileEntityNexus extends TileEntity implements INexusAccess, IInvent
 	public boolean isActive()
 	{
 		return this.activated;
+	}
+	
+	@Override
+	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
+		this.readFromNBT(pkt.func_148857_g());
+        this.worldObj.markBlockForUpdate(this.xCoord, this.yCoord, this.zCoord);
+	}
+
+	@Override
+	public Packet getDescriptionPacket() {
+		NBTTagCompound tag = new NBTTagCompound();
+		this.writeToNBT(tag);
+		return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 0, tag);
 	}
 }

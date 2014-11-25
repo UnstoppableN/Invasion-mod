@@ -9,6 +9,8 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.IChatComponent;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
@@ -62,6 +64,8 @@ public class ItemStrangeBone extends ItemIM
                   wolf.worldObj.spawnEntityInWorld(newWolf);
                   wolf.setDead();
                   itemStack.stackSize -= 1;
+              }else{
+            	  player.addChatMessage(new ChatComponentText("The wolf doesn't like this strange bone."));
               }
           }
 

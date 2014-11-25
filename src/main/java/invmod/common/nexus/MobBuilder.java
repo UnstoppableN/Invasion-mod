@@ -1,6 +1,4 @@
 package invmod.common.nexus;
-//NOOB HAUS: This files is done!! (figured out how to fix the case select)
-
 
 import invmod.common.mod_Invasion;
 import invmod.common.entity.EntityIMBurrower;

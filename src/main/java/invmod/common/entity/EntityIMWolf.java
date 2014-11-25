@@ -227,45 +227,45 @@ public class EntityIMWolf extends EntityWolf
     return (this.worldObj.checkNoEntityCollision(this.boundingBox)) && (this.worldObj.getCollidingBoundingBoxes(this, this.boundingBox).size() == 0) && (!this.worldObj.isAnyLiquid(this.boundingBox));
   }
 
-  @Override
-  public boolean interact(EntityPlayer player)
-  {
-    ItemStack itemstack = player.inventory.getCurrentItem();
-    if (itemstack != null)
-    {
-      if ((itemstack.getItem() == Items.bone) && (player.getDisplayName().equalsIgnoreCase(((EntityPlayerMP)getOwner()).getDisplayName())) && (this.dataWatcher.getWatchableObjectByte(30) == 1))
-      {
-        this.dataWatcher.updateObject(30, Byte.valueOf((byte)0));
-        this.nexus = null;
-
-        itemstack.stackSize -= 1;
-        if (itemstack.stackSize <= 0)
-          player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
-        return false;
-      }
-      if ((itemstack.getItem() == mod_Invasion.itemStrangeBone) && (player.getDisplayName().equalsIgnoreCase(((EntityPlayerMP)getOwner()).getDisplayName())))
-      {
-        INexusAccess newNexus = findNexus();
-        if ((newNexus != null) && (newNexus != this.nexus))
-        {
-          this.nexus = newNexus;
-          this.dataWatcher.updateObject(30, Byte.valueOf((byte)1));
-          this.nexusX = this.nexus.getXCoord();
-          this.nexusY = this.nexus.getYCoord();
-          this.nexusZ = this.nexus.getZCoord();
-
-          itemstack.stackSize -= 1;
-          if (itemstack.stackSize <= 0) {
-            player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
-          }
-          this.maxHealth = 25.0F;
-          setEntityHealth(25.0F);
-        }
-        return true;
-      }
-    }
-    return super.interact(player);
-  }
+//  @Override
+//  public boolean interact(EntityPlayer player)
+//  {
+//    ItemStack itemstack = player.inventory.getCurrentItem();
+//    if (itemstack != null)
+//    {
+////      if ((itemstack.getItem() == Items.bone) && (player.getDisplayName().equalsIgnoreCase(((EntityPlayerMP)getOwner()).getDisplayName())) && (this.dataWatcher.getWatchableObjectByte(30) == 1))
+////      {
+////        this.dataWatcher.updateObject(30, Byte.valueOf((byte)0));
+////        this.nexus = null;
+////
+////        itemstack.stackSize -= 1;
+////        if (itemstack.stackSize <= 0)
+////          player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
+////        return false;
+////      }
+//      if ((itemstack.getItem() == mod_Invasion.itemStrangeBone) && (player.getDisplayName().equalsIgnoreCase(((EntityPlayerMP)getOwner()).getDisplayName())))
+//      {
+//        INexusAccess newNexus = findNexus();
+//        if ((newNexus != null) && (newNexus != this.nexus))
+//        {
+//          this.nexus = newNexus;
+//          this.dataWatcher.updateObject(30, Byte.valueOf((byte)1));
+//          this.nexusX = this.nexus.getXCoord();
+//          this.nexusY = this.nexus.getYCoord();
+//          this.nexusZ = this.nexus.getZCoord();
+//
+//          itemstack.stackSize -= 1;
+//          if (itemstack.stackSize <= 0) {
+//            player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
+//          }
+//          this.maxHealth = 25.0F;
+//          setEntityHealth(25.0F);
+//        }
+//        return true;
+//      }
+//    }
+//    return super.interact(player);
+//  }
 
   @Override
   public void writeEntityToNBT(NBTTagCompound nbttagcompound)

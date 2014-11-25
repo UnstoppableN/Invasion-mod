@@ -13,6 +13,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
 public class ItemInfusedSword extends ItemSword
@@ -107,7 +108,7 @@ public class ItemInfusedSword extends ItemSword
   {
     return block == Blocks.web;
   }
-
+  
   @Override
   public boolean onBlockDestroyed(ItemStack par1ItemStack, World par2World, Block block, int par4, int par5, int par6, EntityLivingBase par7EntityLivingBase)
   {

@@ -294,16 +294,17 @@ public class EntityIMPrimedTNT extends EntityTNTPrimed{
 	            //check if mobgriefing is enabled
 	    		boolean mobgriefing = this.worldObj.getGameRules().getGameRuleBooleanValue("mobGriefing");
 	    		
-	    		if(!this.worldObj.isRemote)
-	    		{
+//	    		if(!this.worldObj.isRemote)
+//	    		{
 	            //this.worldObj.createExplosion(null, this.xTile, this.yTile, this.zTile, 1.0F, true);
 	            
 	    			 Explosion explosion = new Explosion(this.worldObj, this, this.xTile, this.yTile, this.zTile, 1.0F);
 	    	            explosion.isFlaming = false;
 	    	            explosion.isSmoking = mobgriefing;
 	    	            explosion.doExplosionA();
-	    	            ExplosionUtil.doExplosionB(this.worldObj,explosion,false);
-	    		}
+	    	            explosion.doExplosionB(true);
+	    	            //ExplosionUtil.doExplosionB(this.worldObj,explosion,false);
+//	    		}
 	            
 	          
 	          }

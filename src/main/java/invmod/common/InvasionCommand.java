@@ -103,6 +103,9 @@ public class InvasionCommand extends CommandBase {
 					}
 					mod_Invasion.getFocusNexus().createBolt(x, y, z, time);
 				}
+			} else if (args[0].equals("status")) {
+				sender.addChatMessage(new ChatComponentText("nexus status:"+mod_Invasion.getFocusNexus().isActive()));
+				
 			}else{
 				sender.addChatMessage(new ChatComponentText("Command not recognised, use /invasion help for a list of all the available commands").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
 			}

@@ -22,7 +22,7 @@ flameTrap.name=Flame Trap (Folded)
 item.smallRemnants.name=Small Remnants
 item.debugWand.name=Debug Wand
 
-itemGroup.invasionTab=Invasion Mod
+itemGroup.invasionTab=Invasion mod
 
 entity.IMZombie.name=IM Zombie
 entity.IMZombiePigman.name=IM Zombie Pigman
@@ -38,3 +38,7 @@ entity.IMBoulder.name=Boulder
 entity.IMEgg.name=Spider Egg
 entity.IMTrap.name=Trap
 entity.IMImp.name=IM Imp
+
+invmod.waila.status.active=Status: Activated
+invmod.waila.status.deactivated=Status: Deactivated
+invmod.waila.wavenumber=Wave: 

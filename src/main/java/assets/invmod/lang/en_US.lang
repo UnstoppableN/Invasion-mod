@@ -38,3 +38,7 @@ entity.IMBoulder.name=Boulder
 entity.IMEgg.name=Spider Egg
 entity.IMTrap.name=Trap
 entity.IMImp.name=IM Imp
+
+invmod.waila.status.active=Status: Activated
+invmod.waila.status.deactivated=Status: Deactivated
+invmod.waila.wavenumber=Wave: 
