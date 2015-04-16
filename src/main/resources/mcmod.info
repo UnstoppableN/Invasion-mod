@@ -7,8 +7,8 @@
   "mcversion": "${mcversion}",
   "url": "",
   "updateUrl": "",
-  "authorList": [ "Lieu", "Elsee", "UnstoppableN" ],
-  "credits": "Lieu and Elsee, the original mod creators. Davidee for better spawn eggs",
+  "authorList": [ "Team Whammich" ],
+  "credits": "Lieu, Elsee, Davidee and TehNut",
   "logoFile": "",
   "screenshots": [],
   "dependencies": ["MinecraftForge"]
