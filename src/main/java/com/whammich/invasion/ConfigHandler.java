@@ -8,6 +8,8 @@ public class ConfigHandler {
 
     public static Configuration config;
 
+    public static boolean enableLogging;
+
     public static void init(File file) {
         config = new Configuration(file);
         syncConfig();
@@ -21,6 +23,10 @@ public class ConfigHandler {
 
         category = "Drops";
         config.addCustomCategoryComment(category, "All settings pertaining to Drops");
+
+        category = "General";
+        config.addCustomCategoryComment(category, "Miscellaneous settings");
+        enableLogging = config.getBoolean("enableLogging", category, true, "Enables logging additional information to the console.");
 
         category = "Mob Tweaks";
         config.addCustomCategoryComment(category, "All settings pertaining to Mobs");
