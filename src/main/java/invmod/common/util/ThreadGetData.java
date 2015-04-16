@@ -1,21 +1,18 @@
 package invmod.common.util;
 
-import invmod.common.mod_Invasion;
+import invmod.Invasion;
 
 //do at start of client
-public class ThreadGetData extends Thread
-{
-	public ThreadGetData()
-	{
-		setDaemon(true);
-		start();
-	}
+public class ThreadGetData extends Thread {
+    public ThreadGetData() {
+        setDaemon(true);
+        start();
+    }
 
-	@Override
-	public void run()
-	{
-		mod_Invasion.latestVersionNumber = VersionChecker.getLatestVersion();
-		mod_Invasion.recentNews = VersionChecker.getRecentNews();
+    @Override
+    public void run() {
+        Invasion.latestVersionNumber = VersionChecker.getLatestVersion();
+        Invasion.recentNews = VersionChecker.getRecentNews();
 
-	}
+    }
 }

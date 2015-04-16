@@ -1,8 +1,7 @@
 package invmod.common.nexus;
 
-public abstract interface IEntityIMPattern
-{
-  public abstract EntityConstruct generateEntityConstruct();
+public abstract interface IEntityIMPattern {
+    public abstract EntityConstruct generateEntityConstruct();
 
-  public abstract EntityConstruct generateEntityConstruct(int paramInt1, int paramInt2);
+    public abstract EntityConstruct generateEntityConstruct(int paramInt1, int paramInt2);
 }

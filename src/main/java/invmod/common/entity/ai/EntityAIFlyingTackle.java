@@ -9,52 +9,43 @@ import invmod.common.entity.MoveState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
 
-public class EntityAIFlyingTackle extends EntityAIBase
-{
-  private EntityIMFlying theEntity;
-  private int time;
+public class EntityAIFlyingTackle extends EntityAIBase {
+    private EntityIMFlying theEntity;
+    private int time;
 
-  public EntityAIFlyingTackle(EntityIMFlying entity)
-  {
-    this.theEntity = entity;
-    this.time = 0;
-  }
-
-  public boolean shouldExecute()
-  {
-    return this.theEntity.getAIGoal() == Goal.TACKLE_TARGET;
-  }
-
-  public boolean continueExecuting()
-  {
-    EntityLivingBase target = this.theEntity.getAttackTarget();
-    if ((target == null) || (target.isDead))
-    {
-      this.theEntity.transitionAIGoal(Goal.NONE);
-      return false;
+    public EntityAIFlyingTackle(EntityIMFlying entity) {
+        this.theEntity = entity;
+        this.time = 0;
     }
 
-    if (this.theEntity.getAIGoal() != Goal.TACKLE_TARGET) {
-      return false;
+    public boolean shouldExecute() {
+        return this.theEntity.getAIGoal() == Goal.TACKLE_TARGET;
     }
-    return true;
-  }
 
-  public void startExecuting()
-  {
-    this.time = 0;
-    EntityLivingBase target = this.theEntity.getAttackTarget();
-    if (target != null)
-    {
-      this.theEntity.getNavigatorNew().setMovementType(INavigationFlying.MoveType.PREFER_WALKING);
-    }
-  }
+    public boolean continueExecuting() {
+        EntityLivingBase target = this.theEntity.getAttackTarget();
+        if ((target == null) || (target.isDead)) {
+            this.theEntity.transitionAIGoal(Goal.NONE);
+            return false;
+        }
 
-  public void updateTask()
-  {
-    if (this.theEntity.getMoveState() != MoveState.FLYING)
-    {
-      this.theEntity.transitionAIGoal(Goal.MELEE_TARGET);
+        if (this.theEntity.getAIGoal() != Goal.TACKLE_TARGET) {
+            return false;
+        }
+        return true;
     }
-  }
+
+    public void startExecuting() {
+        this.time = 0;
+        EntityLivingBase target = this.theEntity.getAttackTarget();
+        if (target != null) {
+            this.theEntity.getNavigatorNew().setMovementType(INavigationFlying.MoveType.PREFER_WALKING);
+        }
+    }
+
+    public void updateTask() {
+        if (this.theEntity.getMoveState() != MoveState.FLYING) {
+            this.theEntity.transitionAIGoal(Goal.MELEE_TARGET);
+        }
+    }
 }

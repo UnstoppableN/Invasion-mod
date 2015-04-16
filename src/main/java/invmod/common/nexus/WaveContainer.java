@@ -1,8 +1,6 @@
 package invmod.common.nexus;
 
-public class WaveContainer
-{
-  public void addWave(Wave wave)
-  {
-  }
+public class WaveContainer {
+    public void addWave(Wave wave) {
+    }
 }

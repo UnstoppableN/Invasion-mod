@@ -1,5 +1,4 @@
 package invmod.common.nexus;
 
-public class WaveBuilderSpiders
-{
+public class WaveBuilderSpiders {
 }

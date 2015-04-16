@@ -1,0 +1,68 @@
+# GUI
+gui.invasion.config.title=Invasion Mod Configuration
+itemGroup.invasion.creativeTab=Invasion Mod
+
+# ITEMS
+item.invasion.material.catalyst.mixture.unstable.name=Unstable Catalyst Mixture
+item.invasion.material.catalyst.mixture.stable.name=Stable Catalyst Mixture
+item.invasion.material.catalyst.nexus.unstable.name=Unstable Nexus Catalyst
+item.invasion.material.catalyst.nexus.stable.name=Stable Nexus Catalyst
+item.invasion.material.catalyst.strong.name=Strong Catalyst
+item.invasion.material.agent.damping.weak.name=Damping Agent
+item.invasion.material.agent.damping.strong.name=Strong Damping Agent
+item.invasion.material.remnants.small.name=Small Remnants
+item.invasion.material.flux.rift.name=Flux Rift
+item.invasion.material.crystal.phase.name=Phase Crystal
+
+item.invasion.trap.empty.name=Empty Trap
+item.invasion.trap.rift.name=Rift Trap (Folded)
+item.invasion.trap.flame.name=Flame Trap (Folded)
+
+item.invasion.bone.strange.name=Strange Bone
+
+item.invasion.probe.adjuster.nexus.name=Nexus Adjuster
+item.invasion.probe.material.name=Material Probe
+
+item.invasion.wand.debug.name=Debug Wand
+item.invasion.sword.infused.name=Infused Sword
+item.invasion.hammer.engineer.name=Engineer's Hammer
+item.invasion.bow.searing.name=Searing Bow
+
+# BLOCKS
+
+# TOOLTIPS
+
+# CHAT
+
+# WAILA
+waila.invasion.status=Status: %s
+waila.invasion.wavenumber=Wave: %s
+
+# ===================== #
+# BELOW THIS IS ALL OLD #
+# ===================== #
+#     TO BE REMOVED     #
+# ===================== #
+
+tile.blockNexus.name=Nexus
+
+itemGroup.invasionTab=Invasion mod
+
+entity.IMZombie.name=IM Zombie
+entity.IMZombiePigman.name=IM Zombie Pigman
+entity.IMSkeleton.name=IM Skeleton
+entity.IMSpider.name=IM Spider
+entity.IMPigEngy.name=IM Pigman Engineer
+entity.IMBird.name=WIP-IM Bird
+entity.IMThrower.name=IM Thrower
+entity.IMWolf.name=IM Wolf
+entity.IMCreeper.name=IM Creeper
+entity.IMGiantBird.name=IM Vulture
+entity.IMBoulder.name=Boulder
+entity.IMEgg.name=Spider Egg
+entity.IMTrap.name=Trap
+entity.IMImp.name=IM Imp
+
+invmod.waila.status.active=Status: Activated
+invmod.waila.status.deactivated=Status: Deactivated
+invmod.waila.wavenumber=Wave:

@@ -1,16 +1,26 @@
-/gradle
-/eclipse
-/build
-/.settings
-/.gradle
+# General use .gitignore for Minecraft modding.
 
-README.txt
-MinecraftForge-License.txt
-MinecraftForge-Credits.txt
-LICENSE-fml.txt
-gradlew.bat
-gradlew
-forge-1.7.10-10.13.0.1180-changelog.txt
-CREDITS-fml.txt
-build.gradle
+# Directories
+/.gradle/
+/build/
+/eclipse/
+/run/
+/out/
+/asm/
 /bin/
+/.idea/
+/.metadata/
+/.settings/
+/libs/
+
+# File Extensions
+*.psd
+*.iml
+*.ipr
+*.iws
+*.classpath
+*.project
+*.class
+
+# Specific files
+Thumbs.db
